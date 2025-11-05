@@ -9,27 +9,28 @@ export const useEvents = () => {
 
   useEffect(() => {
     const fetchEvents = async (): Promise<void> => {
-    //   try {
-    //     const events = await eventService.fetchEvents();
-    //     setData(events);
-    //   } catch (err: any) {
-    //     setError(err.message);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-     try {
-        const events: Event[] = await eventService.fetchEvents();
+      try {
+        const events = await eventService.fetchEvents();
         setData(events);
-      } catch (err: unknown) { 
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
         setIsLoading(false);
       }
     };
+    //  try {
+    //     const events: Event[] = await eventService.fetchEvents();
+    //     setData(events);
+    //   } catch (err: unknown) { 
+    //     if (err instanceof Error ) {
+    //       setError(err.message);
+    //     } else {
+    //       setError("An unknown error occurred");
+    //     }
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
     fetchEvents();
   }, []);
 

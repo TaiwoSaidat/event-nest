@@ -1,9 +1,12 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from "react";
 import { useEvents } from "@/hooks/useEvents";
 import { useEventById } from "@/hooks/useEventsById";
 import { EventListPage } from "@/components/pages/EventListPage";
 import { EventDetailPage } from "@/components/pages/EventDetailsPage";
+import RegistrationSuccess from "@/components/pages/RegistrationSuccess";
+import { RegistrationForm } from "@/components/events/RegistrationForm";
+// import { emailService } from "@/services/emailService";
 // import Image from "next/image";
 
 // export default function Home() {
@@ -17,7 +20,9 @@ import { EventDetailPage } from "@/components/pages/EventDetailsPage";
 // }
 
 export default function EventApp() {
-  const [view, setView] = useState<"list" | "single">("list");
+  const [view, setView] = useState<"list" | "detail" | "register" | "success">(
+    "list"
+  );
   const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [petsFilter, setPetsFilter] = useState(false);
@@ -32,10 +37,27 @@ export default function EventApp() {
 
   const handleEventClick = (id: number) => {
     setSelectedEventId(id);
-    setView("single");
+    setView("detail");
   };
 
   const handleBackToList = () => {
+    setView("list");
+    setSelectedEventId(null);
+  };
+
+  const handleRegister = () => {
+    setView("register");
+  };
+
+  const handleBackToDetail = () => {
+    setView("detail");
+  };
+
+  const handleRegistrationSuccess = () => {
+    setView("success");
+  };
+
+  const handleBackToEvents = () => {
     setView("list");
     setSelectedEventId(null);
   };
@@ -56,8 +78,42 @@ export default function EventApp() {
     );
   }
 
-  if (view === "single" && selectedEvent) {
-    return <EventDetailPage event={selectedEvent} onBack={handleBackToList} />;
+  if (!selectedEvent && view !== "list") {
+    setView("list");
+    return null;
+  }
+
+  // if (view === "single" && selectedEvent) {
+  //   return <EventDetailPage event={selectedEvent} onBack={handleBackToList} />;
+  // }
+
+  if (view === "success" && selectedEvent) {
+    return (
+      <RegistrationSuccess
+        event={selectedEvent}
+        onBackToEvents={handleBackToEvents}
+      />
+    );
+  }
+
+  if (view === "register" && selectedEvent) {
+    return (
+      <RegistrationForm
+        event={selectedEvent}
+        onBack={handleBackToDetail}
+        onSuccess={handleRegistrationSuccess}
+      />
+    );
+  }
+
+  if (view === "detail" && selectedEvent) {
+    return (
+      <EventDetailPage
+        event={selectedEvent}
+        onBack={handleBackToList}
+        onRegister={handleRegister}
+      />
+    );
   }
 
   return (

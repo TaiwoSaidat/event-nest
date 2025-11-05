@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   icon?: React.ReactNode;
   active?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -18,12 +19,13 @@ export const Button: React.FC<ButtonProps> = ({
   className = "",
   icon,
   active = false,
+  type = "button",
 }) => {
   const baseStyles = "font-medium transition-all rounded-lg";
 
   const variants = {
     primary:
-      "w-full bg-blue-600 text-white py-4 text-lg hover:bg-blue-700 hover:shadow-lg",
+      "w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-4 text-lg hover:bg-blue-700 hover:shadow-lg",
     secondary: "flex items-center gap-2 text-blue-600 hover:text-blue-800",
     filter: active
       ? "flex items-center gap-2 px-6 py-3 bg-green-600 text-white shadow-md"
@@ -32,6 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`${baseStyles} ${variants[variant]} ${className} ${

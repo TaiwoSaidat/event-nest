@@ -7,11 +7,13 @@ import { Button } from "../ui/Button";
 interface EventDetailPageProps {
   event: Event;
   onBack: () => void;
+  onRegister: () => void;
 }
 
 export const EventDetailPage: React.FC<EventDetailPageProps> = ({
   event,
   onBack,
+  onRegister,
 }) => {
   return (
     <div className="min-h-screen bg-blue-50">
@@ -66,7 +68,9 @@ export const EventDetailPage: React.FC<EventDetailPageProps> = ({
               />
             </div>
 
-            <Button variant="primary">Register for Event</Button>
+            <Button variant="primary" onClick={onRegister}>
+              Register for Event
+            </Button>
           </div>
         </div>
       </div>

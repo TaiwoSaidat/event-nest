@@ -10,3 +10,16 @@ interface Event {
   organizer: string;
   petsAllowed: boolean;
 }
+
+interface RegistrationForm {
+  fullName: string;
+  email: string;
+  phone: string;
+  gender: string;
+  dateOfBirth: string;
+  numberOfTickets: number;
+  specialRequirements: string;
+  dietaryPreferences: string;
+  agreeToTerms: boolean;
+  subscribeToUpdates: boolean;
+}
