@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-// import { Event } from '../types/event';
 
 export const useEventFilters = (
   events: Event[],

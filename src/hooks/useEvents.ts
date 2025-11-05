@@ -1,8 +1,6 @@
 // 'use client';
 import { useState, useEffect } from "react";
 import { eventService } from "@/services/eventService";
-// import eventService from '../services/eventService';
-// import { Event } from '../types/event';
 
 export const useEvents = () => {
   const [data, setData] = useState<Event[]>([]);

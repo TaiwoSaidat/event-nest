@@ -1,3 +1,5 @@
+
+
 const getCategoryColor = (category: string): string => {
   const colors: Record<string, string> = {
     "animal welfare": "bg-pink-100 text-pink-700",
