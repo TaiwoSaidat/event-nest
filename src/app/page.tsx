@@ -6,6 +6,7 @@ import { EventListPage } from "@/components/pages/EventListPage";
 import { EventDetailPage } from "@/components/pages/EventDetailsPage";
 import RegistrationSuccess from "@/components/pages/RegistrationSuccess";
 import { RegistrationForm } from "@/components/events/RegistrationForm";
+import { Toaster } from "react-hot-toast";
 // import { emailService } from "@/services/emailService";
 // import Image from "next/image";
 
@@ -117,6 +118,7 @@ export default function EventApp() {
   }
 
   return (
+    <> 
     <EventListPage
       events={events}
       onEventClick={handleEventClick}
@@ -126,6 +128,8 @@ export default function EventApp() {
       onPetsFilterChange={() => setPetsFilter(!petsFilter)}
       currentPage={currentPage}
       onPageChange={setCurrentPage}
-    />
+      />
+      <Toaster />
+    </>
   );
 }

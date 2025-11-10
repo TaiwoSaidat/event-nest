@@ -4,11 +4,22 @@ import { Button } from "../ui/Button";
 
 const RegistrationSuccess = ({
   event,
+  // email,
+  // tickets,
+  // fullName,
   onBackToEvents,
 }: {
   event: Event;
+  // email: string;
+  // tickets: number;
+  // fullName: string;
   onBackToEvents: () => void;
 }) => {
+  const message = `You have registered for '${event.title}' event at '${
+    event.location
+  }' by '${event.organizer}' on ${event.date}, ${
+    event.time}
+  .`;
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full text-center">
@@ -21,6 +32,16 @@ const RegistrationSuccess = ({
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Registration Successful!
         </h1>
+
+        {/* <div className="bg-blue-50 rounded-lg p-6 mb-6 text-left">
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">
+            Registration Summary
+          </h2>
+          <p className="text-gray-700">
+            You have successfully registered for the event. A confirmation email
+            has been sent to your registered email address.
+          </p>
+        </div> */}
 
         <div className="bg-blue-50 rounded-lg p-6 mb-6 text-left">
           <h2 className="text-xl font-semibold text-gray-900 mb-3">
@@ -42,15 +63,23 @@ const RegistrationSuccess = ({
             <p>
               <strong>Organizer:</strong> {event.organizer}
             </p>
+            {/* <p>
+              <strong>Number of Tickets:</strong> {tickets}
+            </p> */}
           </div>
         </div>
 
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 text-left">
-          <p className="text-sm text-yellow-800">
-            <strong>📧 Check your email!</strong> A confirmation email has been
-            sent to your registered email address. This email will serve as your
-            entry ticket.
-          </p>
+        <div className="bg-green-200 border-l-4 border-green-400 p-4 mb-6 ">
+          <div className="text-sm text-gray-700">
+            <div className=" animate-pulse text-2xl capitalize py-2">
+              <strong>Check your mail!!!!!!</strong>
+            </div>
+            <div className=" text-lg space-y-2">
+              <p>A confirmation email has been sent to you with message </p>
+              <p className="bg-yellow-50 border-2 rounded-lg py-4 px-2">{message}</p>
+              <p>Screenshot this page or the mail to serve as your entry ticket.</p>
+            </div>
+          </div>
         </div>
 
         <Button variant="primary" onClick={onBackToEvents}>

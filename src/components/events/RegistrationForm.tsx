@@ -14,6 +14,7 @@ import FormSelect from "../forms/FormSelect";
 import FormTextarea from "../forms/FormTextarea";
 import FormCheckbox from "../forms/FormCheckbox";
 import { emailService } from "@/services/emailService";
+import toast from "react-hot-toast";
 
 export const RegistrationForm = ({
   event,
@@ -55,13 +56,22 @@ export const RegistrationForm = ({
       onSuccess();
     } catch (error) {
       console.error("Registration failed:", error);
-      alert("Registration failed. Please try again.");
+    //   alert("Registration failed. Please try again.");
+        toast.error("Registration failed. Please try again.", {
+            style: {
+              background: '#b91c1c',
+              color: '#fff',
+            },
+        });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const updateField = (field: keyof RegistrationForm, value: any) => {
+  const updateField = (
+    field: keyof RegistrationForm,
+    value: RegistrationForm[keyof RegistrationForm]
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -81,7 +91,7 @@ export const RegistrationForm = ({
             <h1 className="text-3xl font-bold mb-2">Event Registration</h1>
             <p className="text-blue-100">{event.title}</p>
             <p className="text-sm text-blue-100 mt-1">
-              {event.date} at {event.time} • {event.location}
+              {event.date} by {event.time} at {event.location}
             </p>
           </div>
 
@@ -116,7 +126,7 @@ export const RegistrationForm = ({
                 value={formData.phone}
                 onChange={(v) => updateField("phone", v)}
                 required
-                placeholder="+1 (555) 123-4567"
+                placeholder="+234 0801 234 5678"
                 icon={<Phone size={18} />}
               />
 
@@ -128,6 +138,7 @@ export const RegistrationForm = ({
                 options={[
                   { value: "male", label: "Male" },
                   { value: "female", label: "Female" },
+                  { value: "non-binary", label: "Non-Binary" },
                   { value: "other", label: "Other" },
                   { value: "prefer-not-to-say", label: "Prefer not to say" },
                 ]}
